@@ -1,5 +1,7 @@
 <?php
 
+include_once  ('helpers/database.php');
+
  $pageInfo = array(
   'pageName' => 'index',
   'title' => 'Chef Em Casa - Inspire-se na Culinária em Comunidade',
