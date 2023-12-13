@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if(!isset($_SESSION['user_id'])){
+    header('Location: ../login.php');
+}
+
 include_once('../helpers/database.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -14,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $post_id = mysqli_real_escape_string($connection, $post_id);
     $comment = mysqli_real_escape_string($connection, $comment);
-    $user_id = mysqli_real_escape_string($connection, $user_id);
+    $user_id = $_SESSION['user_id'];
 
     $query = "INSERT INTO comments (post_id, user_id, content) VALUES ('$post_id', '$user_id', '$comment')";
 
