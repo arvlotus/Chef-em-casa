@@ -203,11 +203,6 @@ include_once(__DIR__ . '/components/public/header.php');
                                 <i class="fas fa-trash"></i>
                             </a>
                             <?php } ?>
-                            <a id="like"
-                                href="request_like_comment.php?comment_id=<?php echo $comment['id']; ?>&post_id=<?php echo $post_id; ?>"
-                                class="btn btn-sm btn-success ml-2">
-                                <i class="fas fa-thumbs-up"></i>
-                            </a>
                             <?php } ?>
                         </div>
                         <?php } ?>

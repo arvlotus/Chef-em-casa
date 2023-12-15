@@ -52,7 +52,7 @@ include_once('../components/admin/header.php');
         <section class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <img src="<?php echo $user_image; ?>" alt="Foto de Perfil" class="img-fluid mb-3">
+                    <img src="<?php echo $user_image; ?>" alt="Foto de Perfil" class="img-fluid mb-3" alt="Foto de usuário" title="Foto de usuário">
                     <h5>
                         <?php echo $user_name; ?>
                     </h5>
@@ -64,31 +64,44 @@ include_once('../components/admin/header.php');
             </div>
             <div class="card mt-3">
                 <div class="card-body">
-                    <form action="">
+                    <form action="requests/atualizar_perfil.php" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="user_id" value="<?php echo $user_id ?>">
+
                         <div class="form-group">
-                            <label for="image">Foto de usuario</label>
+                            <label for="image">Foto de usuário</label>
                             <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
                         </div>
+
                         <div class="form-group">
                             <label for="name">Nome</label>
-                            <input type="text" class="form-control" id="name" value="<?php echo $user_name ?>">
+                            <input type="text" class="form-control" id="name" name="name" value="<?php echo $user_name ?>">
                         </div>
+
                         <div class="form-group">
                             <label for="email">Endereço de Email</label>
-                            <input type="email" class="form-control" id="email" value="<?php echo $user_email ?>">
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $user_email ?>">
                         </div>
+
+                        <div class="form-group">
+                            <label for="about">Sobre</label>
+                            <input type="about" class="form-control" id="about" name="about" value="<?php echo $user_about ?>">
+                        </div>
+
                         <div class="form-group">
                             <label for="password">Nova Senha</label>
-                            <input type="password" class="form-control" id="password">
+                            <input type="password" class="form-control" id="password" name="password">
                         </div>
+
                         <div class="form-group">
-                            <label for="password">Confirme sua senha</label>
-                            <input type="password" class="form-control" id="password">
+                            <label for="confirm_password">Confirme sua senha</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                         </div>
+
                         <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                     </form>
                 </div>
             </div>
+
         </section>
 
         <!-- Publicações e Comentários -->
