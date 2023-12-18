@@ -31,7 +31,7 @@ if ($_FILES['image']['size'] > 0){
 
     // Processar a upload da nova imagem
 
-    $targetDir ='../../src/img/imgperfil/'; // Define um local 
+    $targetDir ='../../../src/img/imgperfil/'; // Define um local 
     $randomName = uniqid() . "_" . basename($_FILES['image']['name']); // Transforma o nome da imagem em um nome aleátorio
     $targetFile = $targetDir . $randomName; // Faz a função de random name funcionar. 
     $uploadOk = 1;
