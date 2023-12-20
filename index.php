@@ -6,6 +6,19 @@
   'description' => 'Bem-vindo ao Chef Em Casa, o seu destino online para explorar, criar e compartilhar experiências culinárias únicas. Descubra receitas deliciosas, compartilhe suas próprias criações e conecte-se com uma comunidade apaixonada por culinária. Seja você um chef experiente ou alguém apenas começando sua jornada na cozinha, aqui você encontrará inspiração para cada paladar.'
 );
 
+// Inclui o arquivo de conexão com o banco de dados
+include_once('helpers/database.php');
+
+// Conexão com o banco de dados
+$connection = connectDatabase();
+
+$querySimilarPosts = "SELECT *
+FROM posts
+LIMIT 3";
+
+// Execução da query para buscar posts relacionados
+$similar_posts = mysqli_query($connection, $querySimilarPosts);
+
 $pageName = $pageInfo['pageName'];
 
 include_once(__DIR__ . '/components/public/header.php');
@@ -105,22 +118,28 @@ include_once(__DIR__ . '/components/public/header.php');
     <div class="container">
       <h2 class="text-center mb-4">Últimas Postagens</h2>
       <div class="row">
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <img src="src/img/12-min.png" class="card-img-top" alt="Escondidinho de Carne Seca">
-            <div class="card-body">
-              <h5 class="card-title">
-                Escondidinho de Carne Seca
-              </h5>
-              <p class="card-text">
-                Um delicioso escondidinho de carne seca com purê de mandioca e queijo coalho gratinado.
-              </p>
-              <a href="post.php" class="btn btn-color1 btn-sm">
-                Leia Mais
-              </a>
-            </div>
-          </div>
-        </div>
+      <?php while ($similar_post = mysqli_fetch_assoc($similar_posts)) { ?>
+                            <div class="col-md-12">
+                                <div class="card mb-4">
+                                    <img src="<?php echo $similar_post['image']; ?>" class="card-img-top"
+                                        alt="<?php echo $similar_post['title']; ?>"
+                                        title="<?php echo $similar_post['title']; ?>">
+                                    <div class="card-body">
+                                        <h6 class="card-title">
+                                            <a href="post.php?post_id=<?php echo $similar_post['id']; ?>">
+                                                <?php echo $similar_post['title']; ?>
+                                            </a>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                            <!-- Mensagem se não houver posts relacionados -->
+                            <?php if(mysqli_num_rows($similar_posts) == 0){ ?>
+                            <div class="alert alert-info">
+                                O autor não possui outros posts.
+                            </div>
+                            <?php } ?>
       </div>
       <div class="text-center mt-4">
         <a href="todas-as-postagens.html" class="btn btn-lg btn-outline-primary">Ver Todas as Postagens</a>

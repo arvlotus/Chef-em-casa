@@ -9,8 +9,10 @@ $connection = connectDatabase();
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 } else {
-    // Lidar com a ausência da chave 'user_id' na sessão
-    exit;
+    // Redireciona para a página de perfil com mensagem de erro
+    $_SESSION['message'] = 'Erro ao editar o perfil.';
+    $_SESSION['message_type'] = 'danger';
+    header('Location: ../../profile.php');
 }
 
 // Sanitização das entradas do formulário

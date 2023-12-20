@@ -14,7 +14,7 @@ include_once('../components/admin/header.php');
         <!-- Sidebar do dashboard -->
         <div class="col-md-3">
             <?php
-                include_once('../components/admin/menu_sidebar.php');
+            include_once('../components/admin/menu_sidebar.php');
             ?>
         </div>
         <!-- Main do dashboard -->
@@ -24,7 +24,7 @@ include_once('../components/admin/header.php');
             <hr>
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form action="requests/request_create_users.php" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="name">Nome</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Insira o nome">
