@@ -7,7 +7,7 @@ $pageInfo = array(
 
 include_once('../components/admin/header.php');
 
-include_once ('../helpers/database.php');
+include_once('../helpers/database.php');
 
 $connection = connectDatabase();
 
@@ -17,7 +17,7 @@ $result = mysqli_query($connection, $query);
 
 $users = array();
 
-if(mysqli_num_rows($result) > 0){
+if (mysqli_num_rows($result) > 0) {
     $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
@@ -29,7 +29,7 @@ if(mysqli_num_rows($result) > 0){
         <!-- Sidebar do dashboard -->
         <div class="col-md-3">
             <?php
-                include_once('../components/admin/menu_sidebar.php');
+            include_once('../components/admin/menu_sidebar.php');
             ?>
         </div>
         <!-- Main do dashboard -->
@@ -53,40 +53,41 @@ if(mysqli_num_rows($result) > 0){
                         </thead>
                         <tbody>
 
-                        <?php foreach($users as $user){ ?>
+                            <?php foreach ($users as $user) { ?>
 
-                            <tr>
-                                <td>
-                                    <?php echo $user['name']; ?>
-                                </td>
-                                <td>
-                                <?php echo $user['email']; ?>
-                                </td>
-                                <td>
-                                <?php echo date('d/m/Y', strtotime($user['created_at']) ); ?>
-                                </td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Ações
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">
-                                                <i class="fas fa-edit"></i>
-                                                Editar
-                                            </a>
-                                            <a class="dropdown-item text-danger" href="#">
-                                                <i class="fas fa-trash"></i>
-                                                Excluir
-                                            </a>
-                                            <a class="dropdown-item" href="#" target="_blank">
-                                                <i class="fas fa-eye"></i>
-                                                Detalhes
-                                            </a>
+                                <tr>
+                                    <td>
+                                        <?php echo $user['name']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $user['email']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo date('d/m/Y', strtotime($user['created_at'])); ?>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Ações
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="edit_user.php?user_id=<?= $user['id'] ?>">
+                                                    <i class="fas fa-edit"></i>
+                                                    Editar
+                                                </a>
+                                                <a class="dropdown-item text-danger" href="requests/request_delete_users.php?user_id=<?= $user['id'] ?>">
+                                                    <i class="fas fa-trash"></i>
+                                                    Excluir
+                                                </a>
+
+                                                <a class="dropdown-item" href="#" target="_blank">
+                                                    <i class="fas fa-eye"></i>
+                                                    Detalhes
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             <?php } ?>
                             <!-- Adicione mais linhas conforme necessário -->
                         </tbody>
