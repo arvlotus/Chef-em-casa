@@ -6,7 +6,15 @@ $pageInfo = array(
 );
 
 include_once('../components/admin/header.php');
+
+if (isset($_GET['user_id'])) {
+    $user_id = $_GET['user_id'];
+}
+
+$connection = connectDatabase();
+
 ?>
+
 
 <!-- Conteúdo do dashboard -->
 <main class="container py-5">
@@ -25,6 +33,7 @@ include_once('../components/admin/header.php');
             <div class="card">
                 <div class="card-body">
                     <form action="requests/request_edit_users.php" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                         <div class="form-group">
                             <label for="name">Nome</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Insira o nome">
