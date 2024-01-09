@@ -28,14 +28,14 @@ include_once('../components/admin/header.php');
                 <div class="col-sm-12 col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <form>
+                            <form id="form">
                                 <div class="form-group">
                                     <label for="ingredients">Ingredientes</label>
                                     <textarea name="ingredients" id="ingredients" cols="30" rows="10"
                                         class="form-control" placeholder="Digite os ingredientes da receita"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-color1 my-2 my-sm-0 text-light btn-sm">
+                                    <button type="submit" class="btn btn-color1 my-2 my-sm-0 text-light btn-sm" id="generate">
                                         <i class="fas fa-robot"></i>
                                         Gerar Receita
                                     </button>

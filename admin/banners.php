@@ -1,8 +1,9 @@
 <?php
+
 $pageInfo = array(
-    'title' => 'Listagem de Usuários',
-    'description' => 'Visualize e gerencie os usuários cadastrados.',
-    'pageName' => 'users',
+    'title' => 'Listagem de Banners da Pagina Inicial',
+    'description' => 'Visualize e gerencie as imagens da pagina inicial.',
+    'pageName' => 'banners',
 );
 
 include_once('../components/admin/header.php');
@@ -11,17 +12,18 @@ include_once('../helpers/database.php');
 
 $connection = connectDatabase();
 
-$query = "SELECT id, name, email, about, image, created_at  FROM users;";
+$query = "SELECT * FROM banners";
 
 $result = mysqli_query($connection, $query);
 
-$users = array();
+$banners = array();
 
 if (mysqli_num_rows($result) > 0) {
-    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $banners = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
 ?>
+
 
 <!-- Conteúdo do dashboard -->
 <main class="container py-5">
@@ -36,8 +38,8 @@ if (mysqli_num_rows($result) > 0) {
         <section class="col-md-9">
             <h2><?= $pageInfo['title'] ?></h2>
             <p><?= $pageInfo['description'] ?></p>
-            <a href="create_user.php" class="btn btn-success my-2 my-sm-0 text-light">
-                Adicionar novo usuário
+            <a href="create_banner.php" class="btn btn-success my-2 my-sm-0 text-light">
+                Adicionar uma nova imagem
             </a>
             <hr>
 
@@ -53,25 +55,25 @@ if (mysqli_num_rows($result) > 0) {
                     <table class="table table-hover table-striped">
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Email</th>
+                                <th>Título</th>
+                                <th>Imagem</th>
                                 <th>Data de Registro</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            <?php foreach ($users as $user) { ?>
+                            <?php foreach ($banners as $banner) { ?>
 
                                 <tr>
                                     <td>
-                                        <?php echo $user['name']; ?>
+                                        <?php echo $banner['title']; ?>
                                     </td>
                                     <td>
-                                        <?php echo $user['email']; ?>
+                                        <?php echo $banner['image']; ?>
                                     </td>
                                     <td>
-                                        <?php echo date('d/m/Y', strtotime($user['created_at'])); ?>
+                                        <?php echo date('d/m/Y', strtotime($banner['created_at'])); ?>
                                     </td>
                                     <td>
                                         <div class="dropdown">
@@ -79,19 +81,15 @@ if (mysqli_num_rows($result) > 0) {
                                                 Ações
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="edit_user.php?user_id=<?= $user['id'] ?>">
+                                                <a class="dropdown-item" href="edit_banner.php?banner_id=<?= $banner['id'] ?>">
                                                     <i class="fas fa-edit"></i>
                                                     Editar
                                                 </a>
-                                                <a class="dropdown-item text-danger" href="requests/request_delete_users.php?user_id=<?= $user['id'] ?>">
+                                                <a class="dropdown-item text-danger" href="requests/request_delete_banners.php?banner_id=<?= $banner['id'] ?>">
                                                     <i class="fas fa-trash"></i>
                                                     Excluir
                                                 </a>
 
-                                                <a class="dropdown-item" href="#" target="_blank">
-                                                    <i class="fas fa-eye"></i>
-                                                    Detalhes
-                                                </a>
                                             </div>
                                         </div>
                                     </td>
@@ -107,6 +105,6 @@ if (mysqli_num_rows($result) > 0) {
 </main>
 
 <?php
-$currentPage = 'users';
+$currentPage = 'banners';
 include_once('../components/admin/footer.php');
 ?>

@@ -23,5 +23,12 @@ include_once('../helpers/isActivePage.php');
         <?php 
         }
     ?>
+    <?php 
+        if($_SESSION['user_level'] == 'admin'){
+    ?>
+        <a href="banners.php" class="list-group-item list-group-item-action <?= isActivePage($currentPage, 'banners') ?>"><i class="fa fa-images"></i> Banners</a>
+        <?php 
+        }
+    ?>
     <a href="chef-ia.php" class="list-group-item list-group-item-action <?= isActivePage($currentPage, 'chef-ia') ?>"><i class="fa fa-robot"></i> Chef IA</a>
 </div>
