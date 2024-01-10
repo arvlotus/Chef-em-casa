@@ -22,20 +22,27 @@ $similar_posts = mysqli_query($connection, $querySimilarPosts);
 $pageName = $pageInfo['pageName'];
 
 include_once(__DIR__ . '/components/public/header.php');
+
+$queryBanners = "SELECT * FROM banners";
+
+$resultBanners = mysqli_query($connection, $queryBanners);
+
+$banners = array();
+
+if (mysqli_num_rows($resultBanners) > 0) {
+    $banners = mysqli_fetch_all($resultBanners, MYSQLI_ASSOC);
+}
+
 ?>
 <main class="">
   <section id="carrousel">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="src/img/10-min.png" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="src/img/11-min.png" d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="src/img/12-min.png" class="d-block w-100" alt="...">
-        </div>
+        <?php foreach($banners as $banner){ ?>
+          <div class="carousel-item active">
+          <img src="<?= $banner['image']; ?>" class="d-block mx-auto" alt="...">
+          </div>
+          <?php } ?>
       </div>
     </div>
   </section>

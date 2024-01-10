@@ -43,20 +43,21 @@ if (mysqli_num_rows($result) > 0) {
             </a>
             <hr>
 
-            <?php if(isset($_SESSION['message'])){ ?>
+            <?php if (isset($_SESSION['message'])) { ?>
                 <div class="alert alert-<?= $_SESSION['message_type'] ?>" role="alert">
                     <?php echo $_SESSION['message']; ?>
                 </div>
-            <?php unset($_SESSION['message']); } ?>
-            
+            <?php unset($_SESSION['message']);
+            } ?>
+
 
             <div class="card">
                 <div class="card-body">
                     <table class="table table-hover table-striped">
                         <thead>
                             <tr>
-                                <th>Título</th>
                                 <th>Imagem</th>
+                                <th>Título</th>
                                 <th>Data de Registro</th>
                                 <th>Ações</th>
                             </tr>
@@ -67,10 +68,11 @@ if (mysqli_num_rows($result) > 0) {
 
                                 <tr>
                                     <td>
-                                        <?php echo $banner['title']; ?>
+                                    <img src="../<?= $banner['image']; ?>" alt="Imagem Existente" class="img-thumbnail mt-2"
+                                style="max-width: 100px;">
                                     </td>
                                     <td>
-                                        <?php echo $banner['image']; ?>
+                                        <?php echo $banner['title']; ?>
                                     </td>
                                     <td>
                                         <?php echo date('d/m/Y', strtotime($banner['created_at'])); ?>
@@ -85,7 +87,7 @@ if (mysqli_num_rows($result) > 0) {
                                                     <i class="fas fa-edit"></i>
                                                     Editar
                                                 </a>
-                                                <a class="dropdown-item text-danger" href="requests/request_delete_banners.php?banner_id=<?= $banner['id'] ?>">
+                                                <a class="dropdown-item text-danger" href="requests/request_delete_banner.php?banner_id=<?= $banner['id'] ?>">
                                                     <i class="fas fa-trash"></i>
                                                     Excluir
                                                 </a>
