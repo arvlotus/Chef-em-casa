@@ -24,7 +24,7 @@ $connection = connectDatabase();
    }else{
        $_SESSION['message'] = "Ocorreu um erro ao cadastrar seu comentario";
        $_SESSION['message_type'] = "danger";
-       header("Location: ./post.php?post_id=$post_id");
+       header("Location: ../post.php?post_id=$post_id");
    }
 
 ?>

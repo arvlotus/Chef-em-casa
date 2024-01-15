@@ -49,6 +49,7 @@ if(mysqli_num_rows($result) > 0){
                     <table class="table table-hover table-striped">
                         <thead>
                             <tr>
+                                <th>Imagem</th>
                                 <th>Título</th>
                                 <th>Descrição</th>
                                 <th>Data de Publicação</th>
@@ -60,6 +61,9 @@ if(mysqli_num_rows($result) > 0){
                         <?php foreach($posts as $post){ ?>
 
                             <tr>
+                                <td>
+                                    <img src="../<?= $post['image']; ?>" alt="Imagem do post" class="img-thumbnail mt-2" style="max-width: 200px;">
+                                </td>
                                 <td>
                                     <?php echo $post['title']; ?>
                                 </td>

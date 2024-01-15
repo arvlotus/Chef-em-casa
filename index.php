@@ -1,6 +1,6 @@
 <?php
 
- $pageInfo = array(
+$pageInfo = array(
   'pageName' => 'index',
   'title' => 'Chef Em Casa - Inspire-se na Culinária em Comunidade',
   'description' => 'Bem-vindo ao Chef Em Casa, o seu destino online para explorar, criar e compartilhar experiências culinárias únicas. Descubra receitas deliciosas, compartilhe suas próprias criações e conecte-se com uma comunidade apaixonada por culinária. Seja você um chef experiente ou alguém apenas começando sua jornada na cozinha, aqui você encontrará inspiração para cada paladar.'
@@ -30,22 +30,20 @@ $resultBanners = mysqli_query($connection, $queryBanners);
 $banners = array();
 
 if (mysqli_num_rows($resultBanners) > 0) {
-    $banners = mysqli_fetch_all($resultBanners, MYSQLI_ASSOC);
+  $banners = mysqli_fetch_all($resultBanners, MYSQLI_ASSOC);
 }
 
 ?>
 <main class="">
-  <section id="carrousel">
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner">
-        <?php foreach($banners as $banner){ ?>
-          <div class="carousel-item active">
-          <img src="<?= $banner['image']; ?>" class="d-block mx-auto" alt="...">
-          </div>
-          <?php } ?>
+<section id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <?php foreach ($banners as $active => $banner): ?>
+      <div class="carousel-item <?= $active === 0 ? 'active' : ''; ?>">
+        <img src="<?= $banner['image']; ?>" class="d-block mx-auto" alt="Imagem do Carrossel">
       </div>
-    </div>
-  </section>
+    <?php endforeach ?>
+  </div>
+</section>
   <section id="about" class="container py-5">
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-6">
@@ -125,28 +123,26 @@ if (mysqli_num_rows($resultBanners) > 0) {
     <div class="container">
       <h2 class="text-center mb-4">Últimas Postagens</h2>
       <div class="row">
-      <?php while ($similar_post = mysqli_fetch_assoc($similar_posts)) { ?>
-                            <div class="col-md-12">
-                                <div class="card mb-4">
-                                    <img src="<?php echo $similar_post['image']; ?>" class="card-img-top"
-                                        alt="<?php echo $similar_post['title']; ?>"
-                                        title="<?php echo $similar_post['title']; ?>">
-                                    <div class="card-body">
-                                        <h6 class="card-title">
-                                            <a href="post.php?post_id=<?php echo $similar_post['id']; ?>">
-                                                <?php echo $similar_post['title']; ?>
-                                            </a>
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php } ?>
-                            <!-- Mensagem se não houver posts relacionados -->
-                            <?php if(mysqli_num_rows($similar_posts) == 0){ ?>
-                            <div class="alert alert-info">
-                                O autor não possui outros posts.
-                            </div>
-                            <?php } ?>
+        <?php while ($similar_post = mysqli_fetch_assoc($similar_posts)) { ?>
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <img src="<?php echo $similar_post['image']; ?>" class="card-img-top" alt="<?php echo $similar_post['title']; ?>" title="<?php echo $similar_post['title']; ?>">
+              <div class="card-body">
+                <h6 class="card-title">
+                  <a href="post.php?post_id=<?php echo $similar_post['id']; ?>">
+                    <?php echo $similar_post['title']; ?>
+                  </a>
+                </h6>
+              </div>
+            </div>
+          </div>
+        <?php } ?>
+        <!-- Mensagem se não houver posts relacionados -->
+        <?php if (mysqli_num_rows($similar_posts) == 0) { ?>
+          <div class="alert alert-info">
+            O autor não possui outros posts.
+          </div>
+        <?php } ?>
       </div>
       <div class="text-center mt-4">
         <a href="todas-as-postagens.html" class="btn btn-lg btn-outline-primary">Ver Todas as Postagens</a>
@@ -173,5 +169,5 @@ if (mysqli_num_rows($resultBanners) > 0) {
 </main>
 
 <?php
-  include_once(__DIR__ . '/components/public/footer.php');
+include_once(__DIR__ . '/components/public/footer.php');
 ?>

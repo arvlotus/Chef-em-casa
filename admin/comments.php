@@ -9,6 +9,31 @@ $pageInfo = array(
 $pageName = $pageInfo['pageName'];
 
 include_once('../components/admin/header.php');
+
+include_once('../helpers/database.php');
+
+$connection = connectDatabase();
+
+$queryc = "SELECT * FROM comments";
+
+$result = mysqli_query($connection, $queryc);
+
+$comments = array();
+
+if(mysqli_num_rows($result) > 0){
+    $comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+$queryu = "SELECT name FROM users;";
+
+$result = mysqli_query($connection, $queryu);
+
+$users = array();
+
+if (mysqli_num_rows($result) > 0) {
+    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
 ?>
 
 <!-- Conteúdo do dashboard -->
@@ -31,7 +56,6 @@ include_once('../components/admin/header.php');
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Postagem</th>
                                 <th>Autor</th>
                                 <th>Comentário</th>
                                 <th>Data de Comentário</th>
@@ -39,12 +63,21 @@ include_once('../components/admin/header.php');
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach($comments as $comment){ ?>
                             <tr>
-                                <td>1</td>
-                                <td>Receita de Massa</td>
-                                <td>João Silva</td>
-                                <td>Delicioso! Vou experimentar em casa.</td>
-                                <td>01/01/2023</td>
+
+                                <td>
+                                    <?php echo $comment['id']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $comment['user_id']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $comment['content']; ?>
+                                </td>
+                                <td>
+                                    <?php echo date('d/m/Y', strtotime($comment['created_at'])); ?>
+                                </td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -55,7 +88,7 @@ include_once('../components/admin/header.php');
                                                 <i class="fas fa-edit"></i>
                                                 Editar
                                             </a>
-                                            <a class="dropdown-item text-danger" href="#">
+                                            <a class="dropdown-item text-danger" href="requests/request_delete_comment.php?comment_id=<?= $comment['id'] ?>">
                                                 <i class="fas fa-trash"></i>
                                                 Excluir
                                             </a>
@@ -67,6 +100,7 @@ include_once('../components/admin/header.php');
                                     </div>
                                 </td>
                             </tr>
+                            <?php } ?>
                             <!-- Adicione mais linhas conforme necessário -->
                         </tbody>
                     </table>

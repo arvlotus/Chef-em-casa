@@ -18,5 +18,5 @@ $query = "INSERT INTO comments (post_id, user_id, content) VALUES ('$post_id', '
 if(mysqli_query($connection, $query)){
     $_SESSION['message'] = "Seu comentário foi publicado com sucesso";
     $_SESSION['message_type'] = "success";
-    header("Location: ../post.php?post_id=$post_id");
+    header("Location: ../../post.php?post_id=$post_id");
 }

@@ -24,7 +24,7 @@ if(mysqli_query($connection, $query)){
 }else{
     $_SESSION['message'] = "Ocorreu um erro ao deletar seu comentario";
     $_SESSION['message_type'] = "danger";
-    header("Location: ./post.php?post_id=$post_id");
+    header("Location: ../post.php?post_id=$post_id");
 }
 
 
