@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validação da imagem
 
-    if(!getimagesize($_FILES['image']['tmp_name']) || file_exists($targetFile) || $_FILES['image']['size'] > 500000){
+    if(!getimagesize($_FILES['image']['tmp_name']) || file_exists($targetFile) || $_FILES['image']['size'] > 5000000){
         $_SESSION['message'] = "Desculpe, a sua imagem deve ter no máximo 5MB.";
         $_SESSION['message_type'] = "danger";
         $uploadOk = 0;

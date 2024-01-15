@@ -50,6 +50,9 @@ $connection = connectDatabase();
                             <a class="dropdown-item" href="profile.php">
                                 <i class="fa fa-user"></i> Perfil
                             </a>
+                            <a class="dropdown-item" href="../index.php">
+                            <i class="fas fa-door-open"></i> Voltar para o Início
+                            </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out"></i> Sair</a>
                         </div>

@@ -124,9 +124,9 @@ if (mysqli_num_rows($resultBanners) > 0) {
       <h2 class="text-center mb-4">Últimas Postagens</h2>
       <div class="row">
         <?php while ($similar_post = mysqli_fetch_assoc($similar_posts)) { ?>
-          <div class="col-md-12">
-            <div class="card mb-4">
-              <img src="<?php echo $similar_post['image']; ?>" class="card-img-top" alt="<?php echo $similar_post['title']; ?>" title="<?php echo $similar_post['title']; ?>">
+          <div class="col-md-6">
+            <div class="card mb-4 mx-auto" >
+              <img src="<?php echo $similar_post['image']; ?>" class="card-img-top" alt="<?php echo $similar_post['title']; ?>" title="<?php echo $similar_post['title']; ?>" style="max-height: 25git0px;">
               <div class="card-body">
                 <h6 class="card-title">
                   <a href="post.php?post_id=<?php echo $similar_post['id']; ?>">
