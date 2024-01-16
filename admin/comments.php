@@ -14,7 +14,13 @@ include_once('../helpers/database.php');
 
 $connection = connectDatabase();
 
-$queryc = "SELECT * FROM comments";
+$queryc = "SELECT
+comments.id as id,
+comments.content as content,
+comments.created_at as created_at,
+users.name as name
+ FROM comments
+ JOIN users ON users.id = comments.user_id";
 
 $result = mysqli_query($connection, $queryc);
 
@@ -70,7 +76,7 @@ if (mysqli_num_rows($result) > 0) {
                                     <?php echo $comment['id']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $comment['user_id']; ?>
+                                    <?php echo $comment['name']; ?>
                                 </td>
                                 <td>
                                     <?php echo $comment['content']; ?>
